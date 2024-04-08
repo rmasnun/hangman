@@ -1,0 +1,458 @@
+body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 1.25em;
+  font-family: sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  background-repeat: no-repeat;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+input:not([hidden]) {
+  font-family: sans-serif;
+  font-size: 1em;
+  padding: 0.5em;
+  margin: 1em auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 1000px) and (min-width: 461px) {
+  .Hangman-main {
+    margin-top: 80px;
+  }
+}
+@media screen and (max-width: 460px) {
+  .Hangman-main {
+    margin-top: 200px;
+    padding-bottom: 20px;
+  }
+}
+
+/* Button animations */
+
+.btn {
+  line-height: 50px;
+  height: 50px;
+  text-align: center;
+  width: 250px;
+  cursor: pointer;
+}
+
+/* 
+    ========================
+          BUTTON ONE
+    ========================
+    */
+.btn-one {
+  color: #fff;
+  transition: all 0.3s;
+  position: relative;
+}
+.btn-one span {
+  transition: all 0.3s;
+}
+.btn-one::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-color: rgba(255, 255, 255, 0.5);
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+  transform: scale(0.1, 1);
+}
+.btn-one:hover span {
+  letter-spacing: 2px;
+}
+.btn-one:hover::before {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+.btn-one::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.3s;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.btn-one:hover::after {
+  opacity: 0;
+  transform: scale(0.1, 1);
+}
+
+/* 
+    ========================
+          BUTTON TWO
+    ========================
+    */
+.btn-two {
+  color: #fff;
+  transition: all 0.5s;
+  position: relative;
+}
+.btn-two span {
+  z-index: 2;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.btn-two::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: all 0.5s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255);
+}
+.btn-two::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.5s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.btn-two:hover::before {
+  transform: rotate(-45deg);
+  background-color: rgba(255, 255, 255, 0);
+}
+.btn-two:hover::after {
+  transform: rotate(45deg);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+/*
+    ========================
+          BUTTON THREE
+    ========================
+    */
+.btn-three {
+  color: #fff;
+  transition: all 0.5s;
+  position: relative;
+}
+.btn-three::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s;
+}
+.btn-three:hover::before {
+  opacity: 0;
+  transform: scale(0.5, 0.5);
+}
+.btn-three::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transform: scale(1.2, 1.2);
+}
+.btn-three:hover::after {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+/*
+    ========================
+          BUTTON RESTART
+    ========================
+    */
+
+.ripplebutton_div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; /* Make the div span the entire width of the page */
+  padding: 20px; /* Add padding for the button */
+  text-align: center; /* Align the button horizontally */
+  background-color: #007bff;
+  z-index: 300;
+  height: 100px;
+}
+
+.ripplebutton_div input[type="submit"] {
+  width: 100%;
+  padding: 10px 20px; /* Adjust input padding as needed */
+  background-color: #fff; /* Adjust input background color as needed */
+  color: #000; /* Adjust input text color as needed */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 30px;
+  z-index: 100;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.rippleButton {
+  position: absolute;
+  top: 50%;
+  margin: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.rippleButton::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: rippleAnimation 0.5s ease-out;
+  pointer-events: none;
+  opacity: 0;
+}
+
+@keyframes rippleAnimation {
+  to {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+}
+
+.rippleButton:active::after {
+  animation: none;
+}
+
+/* music bars animation */
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh; /* Adjust height as needed */
+  width: 2rem; /* Adjust width as needed */
+}
+
+.bars__item {
+  animation: play 1s ease-out infinite;
+  background-image: linear-gradient(to top, rgb(14 165 233), rgb(99 102 241));
+  height: 0.5rem; /* Adjust height as needed */
+  width: 100%; /* Adjust width as needed */
+  margin: 0.25rem 0; /* Adjust margin as needed */
+}
+
+/* Rest of your CSS remains unchanged */
+
+.bars__item:nth-child(1) {
+  animation-delay: 0s;
+}
+.bars__item:nth-child(2) {
+  animation-delay: 0.7s;
+}
+.bars__item:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.bars__item:nth-child(4) {
+  animation-delay: 0.9s;
+}
+
+@keyframes play {
+  0% {
+    height: 10%;
+  }
+
+  25% {
+    height: 75%;
+  }
+
+  50% {
+    height: 50%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 10%;
+  }
+}
+
+/* Page fill on winning and loosing */
+.container {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.yellow-stroke {
+  clip-path: url(#YellowSvgPath);
+  position: relative;
+  background: rgb(44, 57, 95);
+  margin: 100px;
+  transform: scale(2);
+  transform-origin: left top;
+  zoom: 3;
+  z-index: 95;
+}
+
+#yellow-stroke {
+  width: 100%;
+  position: absolute;
+  top: -56px;
+  left: -100px;
+  stroke-dasharray: 1800;
+  stroke-dashoffset: -1800;
+  animation: stroke 10s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+#yellow-stroke path {
+  stroke-dasharray: 800; /* Length of the entire path */
+  stroke-dashoffset: 800; /* Start with the entire path hidden */
+  animation: animateStroke 5s linear forwards; /* Animation properties */
+}
+
+.brush {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 5s linear forwards;
+}
+
+@keyframes animateStroke {
+  0% {
+    stroke-dashoffset: 800; /* Start with the entire path hidden */
+  }
+  100% {
+    stroke-dashoffset: 0; /* Offset to reveal the full path */
+  }
+}
+
+/* Audio CSS */
+@media screen and (max-width: 1000px) {
+  .audio-player {
+    display: None;
+  }
+}
+
+@media screen and (min-width: 1001px) {
+  .audio-player {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.audio-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+audio {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.mute-toggle {
+  background-color: #555;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mute-toggle:hover {
+  background-color: #777;
+}
+
+.music-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  float: left;
+  margin-right: 20px; /* Add margin for space between list and player */
+}
+
+.music-item {
+  margin-bottom: 10px;
+}
+
+.music-item a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background-color: #636363;
+  transition: background-color 0.3s ease;
+}
+
+.music-item a:hover {
+  background-color: #555;
+}
+
+/* Bottom right banner css */
+.banner {
+  z-index: 200;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #750787;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
